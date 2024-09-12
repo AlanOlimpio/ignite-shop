@@ -11,6 +11,7 @@
   "dependencies": {
     "@stitches/core": "^1.2.8",
     "@stitches/react": "^1.2.8",
+    "keen-slider": "^6.8.6",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18"
