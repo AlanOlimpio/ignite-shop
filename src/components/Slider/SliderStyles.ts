@@ -8,7 +8,7 @@ export const SliderContainer = styled("main", {
   minHeight: 656,
 });
 
-export const Product = styled("a", {
+export const Product = styled("div", {
   background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
   borderRadius: 8,
   cursor: "pointer",
@@ -21,6 +21,7 @@ export const Product = styled("a", {
 
   img: {
     objectFit: "cover",
+    maxWidth: "100%",
   },
 
   footer: {
@@ -45,6 +46,7 @@ export const Product = styled("a", {
     strong: {
       fontSize: "$lg",
       fontWeight: "400",
+      color: "$gray100",
     },
 
     span: {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { SliderContainer, Product } from "./SliderStyles";
 import "keen-slider/keen-slider.min.css";
 import { priceFormatter } from "@/utils/formatter";
+import Link from "next/link";
 
 interface SliderProps {
   products: {
@@ -27,16 +28,22 @@ function Slider({ products }: SliderProps) {
     <SliderContainer ref={sliderRef} className="keen-slider">
       {products.map((product) => {
         return (
-          <Product key={product.name} className="keen-slider__slide">
-            <Image src={product.imageUrl} width={520} height={480} alt="" />
+          <Link
+            href={`/product/${product.id}`}
+            key={product.id}
+            prefetch={false}
+          >
+            <Product key={product.name} className="keen-slider__slide">
+              <Image src={product.imageUrl} width={520} height={480} alt="" />
 
-            <footer>
-              <strong>{product.name}</strong>
-              {product?.price && (
-                <span>{priceFormatter.format(product.price)}</span>
-              )}
-            </footer>
-          </Product>
+              <footer>
+                <strong>{product.name}</strong>
+                {product?.price && (
+                  <span>{priceFormatter.format(product.price)}</span>
+                )}
+              </footer>
+            </Product>
+          </Link>
         );
       })}
     </SliderContainer>
