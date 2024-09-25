@@ -7,6 +7,7 @@ import { GetStaticPaths, Metadata } from "next";
 import Image from "next/image";
 import { getProductById } from "@/service/Products";
 import { Suspense } from "react";
+import ButtonCheckout from "@/components/ButtonCheckout";
 
 interface ProductProps {
   product: {
@@ -17,7 +18,7 @@ interface ProductProps {
     description: string;
   };
 }
-const getStaticPaths = (async () => {
+const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [
       {
@@ -26,7 +27,7 @@ const getStaticPaths = (async () => {
     ],
     fallback: true,
   };
-}) satisfies GetStaticPaths;
+};
 export default async function Product({
   params,
 }: {
@@ -46,8 +47,7 @@ export default async function Product({
           <span>{product.price}</span>
 
           <p>{product.description}</p>
-
-          <button>Comprar agora</button>
+          <ButtonCheckout priceId={product.defaultPriceId} />
         </ProductDetails>
       </ProductContainer>
     </Suspense>

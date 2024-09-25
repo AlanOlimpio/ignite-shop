@@ -35,6 +35,7 @@ export async function getProductById(productId: string) {
       ? priceFormatter.format(price.unit_amount / 100)
       : "",
     description: product.description,
+    defaultPriceId: price.id,
   };
 
   return productFormat;
