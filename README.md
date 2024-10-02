@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ignite Shop
 
-## Getting Started
+Esse aplicativo foi desenvolvido no curso <a href="https://app.rocketseat.com.br/journey/react-js-2022/overview" target="_blank">ReactJS</a> , o objetivo era aprender fundamentos do Next.js.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+|Home| Product| Checkout | Success |
+|-------|------|------|------|
+|<img src="screencapture-home.png" alt="Home" width="100%">|<img src="screencapture-product.png" alt="Product">|<img src="screencapture-checkout.png" alt="Checkout">|<img src="screencapture-success.png" alt="Success">|
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## 🔨 Funcionalidades do projeto
 
-To learn more about Next.js, take a look at the following resources:
+É um e-commerce conectado a uma API do <a href="https://stripe.com/br" target="_blank">Stripe</a>.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✔️ Técnicas e tecnologias utilizadas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Lista das bibliotecas utilizadas no desenvolvimento:
 
-## Deploy on Vercel
+- `react`
+- `react-dom`
+- `@stitches/core`
+- `@stitches/react`
+- `typescript`
+- `axios`
+- `keen-slider`
+- `next`
+- `stripe`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🛠️ Abrir e rodar o projeto
+
+Dentro da pasta do projeto execute npm i ou yarn para instalar as dependências, é necessário ter um conta criada no <a href="https://stripe.com/br" target="_blank">Stripe</a> com produtos cadastrados, obter as chaves da API renomear a  .env.example para .env.local, adicionar as chaves de api NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY e STRIPE_SECRET_KEY salvar o arquivo e para  rodar a aplicação é necessário abrir o terminal na pasta do projeto e digitar os comandos npm run dev  ou yarn dev.
