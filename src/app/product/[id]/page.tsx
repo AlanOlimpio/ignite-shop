@@ -3,10 +3,10 @@ import {
   ProductContainer,
   ProductDetails,
 } from "../productStyles";
-import { GetStaticPaths, Metadata } from "next";
+import { GetStaticPaths, Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import { getProductById } from "@/service/Products";
-import { Suspense } from "react";
+import { cache, Suspense } from "react";
 import ButtonCheckout from "@/components/ButtonCheckout";
 
 interface ProductProps {
@@ -18,6 +18,7 @@ interface ProductProps {
     description: string;
   };
 }
+
 const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [
@@ -28,12 +29,38 @@ const getStaticPaths: GetStaticPaths = async () => {
     fallback: true,
   };
 };
+
+const getProduct = cache(async (id: string) => {
+  const res = await getProductById(id);
+
+  return res;
+});
+
+export async function generateMetadata(
+  {
+    params,
+  }: {
+    params: ProductProps["product"];
+  },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const product = await getProduct(params.id);
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: product.name,
+    openGraph: {
+      images: [`${product.imageUrl}`, ...previousImages],
+    },
+  };
+}
 export default async function Product({
   params,
 }: {
   params: ProductProps["product"];
 }) {
-  const product = await getProductById(params.id);
+  const product = await getProduct(params.id);
 
   return (
     <Suspense fallback={<ProductContainer>Loading...</ProductContainer>}>
