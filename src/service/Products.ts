@@ -2,13 +2,14 @@
 import Stripe from "stripe";
 import { stripe } from "../lib/stripe";
 import { priceFormatter } from "@/utils/formatter";
+import { ProductInterfaceProps } from "@/interfaces/Product";
 export async function getProducts() {
   const response = await stripe.products.list({
     limit: 10,
     expand: ["data.default_price"],
   });
 
-  const products = response.data.map((product) => {
+  const products: ProductInterfaceProps[] = response.data.map((product) => {
     const price = product.default_price as Stripe.Price;
 
     return {
