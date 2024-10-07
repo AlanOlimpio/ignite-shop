@@ -16,8 +16,10 @@ export default function RootLayout({
       <body>
         <ServerStylesheet>
           <Container>
-            <Header />
-            <CartStoreContextProvider>{children}</CartStoreContextProvider>
+            <CartStoreContextProvider>
+              <Header />
+              {children}
+            </CartStoreContextProvider>
           </Container>
         </ServerStylesheet>
       </body>

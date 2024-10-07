@@ -8,16 +8,7 @@ import Image from "next/image";
 import { getProductById } from "@/service/Products";
 import { cache, Suspense } from "react";
 import ButtonCheckout from "@/components/ButtonCheckout";
-
-interface ProductProps {
-  product: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: string;
-    description: string;
-  };
-}
+import { ProductInterfaceProps } from "@/interfaces/Product";
 
 const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -40,7 +31,7 @@ export async function generateMetadata(
   {
     params,
   }: {
-    params: ProductProps["product"];
+    params: ProductInterfaceProps;
   },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
@@ -58,7 +49,7 @@ export async function generateMetadata(
 export default async function Product({
   params,
 }: {
-  params: ProductProps["product"];
+  params: ProductInterfaceProps;
 }) {
   const product = await getProduct(params.id);
 
@@ -74,7 +65,7 @@ export default async function Product({
           <span>{product.price}</span>
 
           <p>{product.description}</p>
-          <ButtonCheckout priceId={product.defaultPriceId} />
+          <ButtonCheckout product={product} />
         </ProductDetails>
       </ProductContainer>
     </Suspense>
