@@ -90,4 +90,5 @@ export const CloseButtom = styled(Dialog.Close, {
 export const Title = styled(Dialog.Title, {
   fontWeight: "500",
   fontSize: "1.25rem",
+  marginBottom: "2rem",
 });

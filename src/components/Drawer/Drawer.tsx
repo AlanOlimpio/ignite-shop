@@ -9,6 +9,7 @@ import {
 import { useContext } from "react";
 import { Handbag, X } from "@phosphor-icons/react";
 import { CartStoreContext } from "@/contexts/CartStore";
+import CartItem from "../CartItem";
 
 function Drawer() {
   const { cartList } = useContext(CartStoreContext);
@@ -29,7 +30,7 @@ function Drawer() {
             <X size={24} />
           </CloseButtom>
           {cartList?.map((product) => {
-            return <p key={product.id}>{product.name}</p>;
+            return <CartItem {...product} key={product.id} />;
           })}
         </Content>
       </Dialog.Portal>
