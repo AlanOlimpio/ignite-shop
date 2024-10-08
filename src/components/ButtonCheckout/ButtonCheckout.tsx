@@ -11,12 +11,16 @@ interface HandleBuyButton {
 }
 
 function ButtonCheckout({ product }: HandleBuyButton) {
+  const productWithQuantity = { ...product, amount: 1 };
   const { addProductCart, cartList } = useContext(CartStoreContext);
 
   const hasCart = cartList.some((item) => item.id === product.id);
 
   return (
-    <CheckoutButton onClick={() => addProductCart(product)} disabled={hasCart}>
+    <CheckoutButton
+      onClick={() => addProductCart(productWithQuantity)}
+      disabled={hasCart}
+    >
       Colocar na sacola
     </CheckoutButton>
   );

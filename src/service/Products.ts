@@ -1,7 +1,6 @@
 "use server";
 import Stripe from "stripe";
 import { stripe } from "../lib/stripe";
-import { priceFormatter } from "@/utils/formatter";
 import { ProductInterfaceProps } from "@/interfaces/Product";
 export async function getProducts() {
   const response = await stripe.products.list({
@@ -32,9 +31,7 @@ export async function getProductById(productId: string) {
     id: product.id,
     name: product.name,
     imageUrl: product.images[0],
-    price: price.unit_amount
-      ? priceFormatter.format(price.unit_amount / 100)
-      : "",
+    price: price.unit_amount,
     description: product.description,
     defaultPriceId: price.id,
   };

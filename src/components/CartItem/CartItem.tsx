@@ -8,6 +8,7 @@ import { ProductInterfaceProps } from "../../interfaces/Product";
 import { useContext } from "react";
 import { CartStoreContext } from "@/contexts/CartStore";
 import Image from "next/image";
+import { priceFormatter } from "@/utils/formatter";
 
 function CartItem({ id, imageUrl, name, price }: ProductInterfaceProps) {
   const { removeProductCart } = useContext(CartStoreContext);
@@ -24,7 +25,7 @@ function CartItem({ id, imageUrl, name, price }: ProductInterfaceProps) {
 
       <WrapperCartItemActions>
         <h2>{name}</h2>
-        <p>{price?.toLocaleString("pt-br", { minimumFractionDigits: 2 })}</p>
+        {price && <p>{priceFormatter.format(price / 100)}</p>}
         <div>
           <button onClick={() => removeProductCart(id)}>Remover</button>
         </div>

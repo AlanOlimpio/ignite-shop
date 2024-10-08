@@ -64,6 +64,9 @@ export const Content = styled(Dialog.Content, {
   position: "fixed",
   top: "0",
   right: "0",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
   boxShadow: "rgba(0, 0, 0, 0.7) 0px 0px 24px 2px",
   "&[data-state='open']": {
     animation: `${sliderIn} 300ms`,
@@ -91,4 +94,49 @@ export const Title = styled(Dialog.Title, {
   fontWeight: "500",
   fontSize: "1.25rem",
   marginBottom: "2rem",
+});
+
+export const WrapperAmount = styled("div", {
+  maxWidth: "100%",
+  display: "flex",
+  gap: "1.25rem",
+  alignItems: "center",
+  justifyContent: "space-between",
+  "p , span": {
+    fontWeight: "400",
+    fontSize: "1.125rem",
+  },
+  marginBottom: "0.5rem",
+});
+
+export const WrapperAmountToPay = styled("div", {
+  maxWidth: "100%",
+  display: "flex",
+  gap: "1.25rem",
+  alignItems: "center",
+  justifyContent: "space-between",
+  p: {
+    fontSize: "1.125rem",
+    fontWeight: "600",
+  },
+  span: {
+    fontSize: "1.5rem",
+    fontWeight: "600",
+  },
+});
+
+export const WrapperNoItems = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  gap: "1.25rem",
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: "100%",
+  p: {
+    fontSize: "1.5rem",
+    fontWeight: "500",
+  },
+  svg: {
+    color: "$green300",
+  },
 });

@@ -9,6 +9,7 @@ import { getProductById } from "@/service/Products";
 import { cache, Suspense } from "react";
 import ButtonCheckout from "@/components/ButtonCheckout";
 import { ProductInterfaceProps } from "@/interfaces/Product";
+import { priceFormatter } from "@/utils/formatter";
 
 const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -62,7 +63,9 @@ export default async function Product({
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          {product.price && (
+            <span>{priceFormatter.format(product.price / 100)}</span>
+          )}
 
           <p>{product.description}</p>
           <ButtonCheckout product={product} />
