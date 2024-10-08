@@ -2,9 +2,7 @@
 import { styled } from "@/styles";
 
 export const CheckoutButton = styled("button", {
-  display: "block",
-  width: "100%",
-  marginTop: "3.438rem",
+  marginTop: "auto",
   backgroundColor: "$green500",
   border: 0,
   color: "$white",
@@ -13,6 +11,7 @@ export const CheckoutButton = styled("button", {
   cursor: "pointer",
   fontWeight: "500",
   fontSize: "$md",
+
   "&:disabled": {
     opacity: 0.6,
     cursor: "not-allowed",

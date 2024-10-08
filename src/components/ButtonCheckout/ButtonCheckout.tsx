@@ -1,27 +1,30 @@
 "use client";
 
 import { checkout } from "@/service/Checkout";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { CheckoutButton } from "./ButtonCheckoutStyles";
-import { CartStoreContext } from "@/contexts/CartStore";
-import { ProductInterfaceProps } from "@/interfaces/Product";
+import { LineItems } from "@/interfaces/Product";
 
-interface HandleBuyButton {
-  product: ProductInterfaceProps;
-}
+function ButtonCheckout(productIdList: LineItems[]) {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false);
+  async function handleBuyButton() {
+    try {
+      setIsCreatingCheckoutSession(true);
+      const response = await checkout(productIdList);
 
-function ButtonCheckout({ product }: HandleBuyButton) {
-  const productWithQuantity = { ...product, amount: 1 };
-  const { addProductCart, cartList } = useContext(CartStoreContext);
-
-  const hasCart = cartList.some((item) => item.id === product.id);
-
+      window.location.href = response.data.checkoutUrl.url;
+    } catch (err) {
+      setIsCreatingCheckoutSession(false);
+      alert("Falha ao redirecionar ao checkout!");
+    }
+  }
   return (
     <CheckoutButton
-      onClick={() => addProductCart(productWithQuantity)}
-      disabled={hasCart}
+      disabled={isCreatingCheckoutSession}
+      onClick={handleBuyButton}
     >
-      Colocar na sacola
+      Finalizar compra
     </CheckoutButton>
   );
 }

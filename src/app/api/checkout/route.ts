@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   if (req.method !== "POST") {
     return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
   }
-  if (!data.body.priceId) {
+  if (!data.body.productIdList && data.body.productIdList.lenght) {
     return NextResponse.json({ error: "Price not found." }, { status: 400 });
   }
   const successUrl = `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`;
@@ -15,12 +15,7 @@ export async function POST(req: NextRequest) {
     mode: "payment",
     success_url: successUrl,
     cancel_url: cancelUrl,
-    line_items: [
-      {
-        price: data.body.priceId,
-        quantity: 1,
-      },
-    ],
+    line_items: data.body.productIdList,
   });
 
   const checkoutSessionFormat = JSON.stringify({

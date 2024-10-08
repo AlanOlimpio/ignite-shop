@@ -7,3 +7,8 @@ export interface ProductInterfaceProps {
   description?: string | null;
   defaultPriceId?: string;
 }
+
+export interface LineItems {
+  price: string;
+  quantity: number;
+}

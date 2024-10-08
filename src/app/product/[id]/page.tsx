@@ -7,9 +7,9 @@ import { GetStaticPaths, Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import { getProductById } from "@/service/Products";
 import { cache, Suspense } from "react";
-import ButtonCheckout from "@/components/ButtonCheckout";
 import { ProductInterfaceProps } from "@/interfaces/Product";
 import { priceFormatter } from "@/utils/formatter";
+import ButtonProduct from "@/components/ButtonProduct";
 
 const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -68,7 +68,7 @@ export default async function Product({
           )}
 
           <p>{product.description}</p>
-          <ButtonCheckout product={product} />
+          <ButtonProduct {...product} />
         </ProductDetails>
       </ProductContainer>
     </Suspense>

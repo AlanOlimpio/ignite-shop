@@ -14,16 +14,13 @@ import { Handbag, ShoppingCart, X } from "@phosphor-icons/react";
 import { CartStoreContext } from "@/contexts/CartStore";
 import CartItem from "../CartItem";
 import { priceFormatter } from "@/utils/formatter";
+import ButtonCheckout from "../ButtonCheckout";
+import { LineItems } from "@/interfaces/Product";
 
 function Drawer() {
   const [sum, setSum] = useState(0);
   const { cartList } = useContext(CartStoreContext);
-
-  function handleToLocaleString(total: number) {
-    return total.toLocaleString("pt-br", {
-      minimumFractionDigits: 2,
-    });
-  }
+  const [productIdList, setProductIdList] = useState<LineItems[]>([]);
 
   useEffect(() => {
     const totalCart = () =>
@@ -34,10 +31,24 @@ function Drawer() {
           return 0;
         }
       }, 0);
-    function handleTotalCart() {
-      setSum(totalCart());
-    }
-    handleTotalCart();
+
+    setSum(totalCart());
+
+    const productPriceIdList: LineItems[] = cartList.reduce(function (
+      list: LineItems[],
+      itemList
+    ) {
+      if (itemList?.defaultPriceId) {
+        list.push({
+          price: itemList?.defaultPriceId,
+          quantity: itemList?.amount || 1,
+        });
+      }
+      return list;
+    },
+    []);
+
+    setProductIdList(productPriceIdList);
   }, [cartList]);
 
   return (
@@ -78,6 +89,7 @@ function Drawer() {
                   <p>Valor total</p>
                   <span>{priceFormatter.format(sum / 100)}</span>
                 </WrapperAmountToPay>
+                <ButtonCheckout {...productIdList} />
               </div>
             </>
           ) : (

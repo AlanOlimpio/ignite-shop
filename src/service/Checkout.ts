@@ -1,17 +1,16 @@
+import { LineItems } from "@/interfaces/Product";
 import { api } from "@/lib/axios";
 
-export async function checkout(priceId: string) {
+export async function checkout(productIdList: LineItems[]) {
   const response = await api.post("/api/checkout", {
     body: {
-      priceId,
+      productIdList,
     },
   });
   return response;
 }
 
-export async function checkoutSessions<SuccessProps>(
-  session_id: string | null
-) {
+export async function checkoutSessions(session_id: string | null) {
   if (!session_id) {
     return null;
   }
