@@ -10,7 +10,10 @@ export const ProductContainer = styled("main", {
   maxWidth: 1180,
   margin: "0 auto",
 
-  "@bp4": { backgroundColor: "$green300" },
+  "@bp2": {
+    padding: "2.5rem 2rem 3rem",
+    gridTemplateColumns: "1fr",
+  },
 });
 
 export const ImageContainer = styled("div", {
@@ -24,9 +27,16 @@ export const ImageContainer = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  "@bp2": {
+    height: "auto",
+  },
 
   img: {
     objectFit: "cover",
+    "@bp2": {
+      maxWidth: "100%",
+      height: "auto",
+    },
   },
 });
 
@@ -51,5 +61,8 @@ export const ProductDetails = styled("div", {
     fontSize: "$md",
     lineHeight: 1.6,
     color: "$gray300",
+    "@bp2": {
+      marginBottom: "1rem",
+    },
   },
 });

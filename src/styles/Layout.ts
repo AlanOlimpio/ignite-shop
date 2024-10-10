@@ -7,4 +7,7 @@ export const Container = styled("div", {
   alignItems: "flex-start",
   justifyContent: "center",
   minHeight: "100vh",
+  "@bp2": {
+    justifyContent: "flex-start",
+  },
 });

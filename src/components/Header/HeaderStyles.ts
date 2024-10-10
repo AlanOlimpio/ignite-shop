@@ -10,4 +10,8 @@ export const HeaderWrapper = styled("header", {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  "@bp2": {
+    padding: "2rem",
+    gridTemplateColumns: "1fr",
+  },
 });

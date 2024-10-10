@@ -5,6 +5,10 @@ export const imageWidth = 140;
 export const WrapperSuccessImage = styled("div", {
   minHeight: "200px",
   position: "relative",
+  "@bp2": {
+    overflowX: "scroll",
+    width: "250px",
+  },
 });
 
 export const ImageContainer = styled("div", {

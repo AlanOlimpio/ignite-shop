@@ -35,4 +35,16 @@ export const SuccessContainer = styled("main", {
       color: "$green300",
     },
   },
+  "@bp2": {
+    padding: "0.5rem 2rem 2rem",
+    justifyContent: "flex-start",
+    h1: {
+      fontSize: "$lg",
+      color: "$gray100",
+    },
+
+    p: {
+      fontSize: "$md",
+    },
+  },
 });
