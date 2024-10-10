@@ -39,6 +39,22 @@ export const CartButton = styled("button", {
   borderRadius: "6px",
   cursor: "pointer",
   transition: "backgroundColor 0.2s",
+  position: "relative",
+  span: {
+    position: "absolute",
+    top: "-0.5rem",
+    right: "-0.5rem",
+    fontSize: "0.875rem",
+    fontWeight: "500",
+    color: "$white",
+    background: "$green500",
+    width: "1.5rem",
+    height: "1.5rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "50%",
+  },
 });
 
 export const Overlay = styled(Dialog.Overlay, {

@@ -56,6 +56,7 @@ function Drawer() {
       <Dialog.Trigger asChild>
         <CartButton>
           <Handbag size={24} weight="bold" />
+          {cartList.length > 0 && <span>{cartList.length}</span>}
         </CartButton>
       </Dialog.Trigger>
       <Dialog.Portal>
