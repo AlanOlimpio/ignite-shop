@@ -62,7 +62,7 @@ export const Overlay = styled(Dialog.Overlay, {
   width: "100vw",
   height: "100vh",
   inset: "0",
-  background: "rgba(0, 0, 0, 0.25)",
+  background: "rgba(0, 0, 0, 0.6)",
   "&[data-state='open']": {
     animation: `${fadeIn} 300ms ease-out`,
   },
@@ -83,6 +83,7 @@ export const Content = styled(Dialog.Content, {
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+  overflowX: "auto",
   boxShadow: "rgba(0, 0, 0, 0.7) 0px 0px 24px 2px",
   "&[data-state='open']": {
     animation: `${sliderIn} 300ms`,
@@ -148,10 +149,7 @@ export const WrapperNoItems = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   minHeight: "100%",
-  p: {
-    fontSize: "1.5rem",
-    fontWeight: "500",
-  },
+
   svg: {
     color: "$green300",
   },

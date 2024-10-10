@@ -7,8 +7,9 @@ import {
   WrapperSuccessImage,
 } from "./SuccessCheckoutInfoStyles";
 import { checkoutSessions } from "@/service/Checkout";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
+import { CartStoreContext } from "@/contexts/CartStore";
 
 interface SuccessProps {
   costumerName: string;
@@ -24,6 +25,7 @@ function SuccessCheckoutInfo() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const router = useRouter();
+  const { resetCard } = useContext(CartStoreContext);
 
   const [props, setProps] = useState<SuccessProps>({
     costumerName: "",
@@ -49,6 +51,7 @@ function SuccessCheckoutInfo() {
       setProps(res?.data.props);
     }
     hadleGetCheckoutSessions();
+    resetCard();
   }, [sessionId]);
 
   return (

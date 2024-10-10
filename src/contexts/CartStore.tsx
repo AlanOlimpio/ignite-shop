@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from "react";
+import { createContext, ReactNode, useEffect, useReducer } from "react";
 import { ProductInterfaceProps } from "../interfaces/Product";
 import {
   handleAddProductCart,
@@ -25,7 +25,6 @@ export function CartStoreContextProvider({
   const [CartStoreState, dispatch] = useReducer(
     cartReducer,
     { cartList: [] },
-
     () => {
       return {
         cartList: [],
@@ -46,6 +45,12 @@ export function CartStoreContextProvider({
   }
 
   const { cartList } = CartStoreState;
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cartList);
+
+    localStorage.setItem("@ignite-shop:cart-state-1.0.0", stateJSON);
+  }, [cartList]);
 
   return (
     <CartStoreContext.Provider

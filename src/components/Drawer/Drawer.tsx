@@ -20,6 +20,7 @@ import { LineItems } from "@/interfaces/Product";
 function Drawer() {
   const [sum, setSum] = useState(0);
   const { cartList } = useContext(CartStoreContext);
+
   const [productIdList, setProductIdList] = useState<LineItems[]>([]);
 
   useEffect(() => {
@@ -96,7 +97,7 @@ function Drawer() {
           ) : (
             <WrapperNoItems>
               <ShoppingCart size={50} weight="light" />
-              <p>Adicione itens ao carrinho!</p>
+              <Title>Adicione itens ao carrinho!</Title>
             </WrapperNoItems>
           )}
         </Content>
