@@ -22,14 +22,20 @@ export async function POST(req: NextRequest) {
   const costumerName = session?.customer_details?.name;
   const product = session?.line_items?.data[0]?.price
     ?.product as Stripe.Product;
+  const productFormat = session?.line_items?.data.map((item) => {
+    const productTemp = item.price?.product as Stripe.Product;
+    if (productTemp) {
+      return {
+        name: productTemp.name,
+        imageUrl: productTemp.images[0],
+      };
+    }
+  });
 
   return NextResponse.json({
     props: {
       costumerName,
-      product: {
-        name: product.name,
-        imageUrl: product.images[0],
-      },
+      product: productFormat,
     },
   });
 }

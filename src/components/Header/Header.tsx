@@ -3,13 +3,18 @@ import Link from "next/link";
 import { HeaderWrapper } from "./HeaderStyles";
 import logoImg from "../../assets/logo.svg";
 import Drawer from "../Drawer";
+import { usePathname } from "next/navigation";
 function Header() {
+  const pathname = usePathname();
+  const isSuccess = pathname !== "/success";
   return (
-    <HeaderWrapper>
+    <HeaderWrapper
+      css={{ justifyContent: `${isSuccess ? "space-between" : "center"}` }}
+    >
       <Link href="/" prefetch={false}>
         <Image src={logoImg} alt="" />
       </Link>
-      <Drawer />
+      {isSuccess && <Drawer />}
     </HeaderWrapper>
   );
 }

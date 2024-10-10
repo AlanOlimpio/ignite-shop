@@ -1,30 +1,43 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { ImageContainer } from "./SuccessCheckoutInfoStyles";
+import {
+  ImageContainer,
+  imageWidth,
+  WrapperSuccessImage,
+} from "./SuccessCheckoutInfoStyles";
 import { checkoutSessions } from "@/service/Checkout";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
 interface SuccessProps {
   costumerName: string;
-  product: {
-    name: string;
-    imageUrl: string;
-  };
+  product: [
+    {
+      name: string;
+      imageUrl: string;
+    }
+  ];
 }
 
 function SuccessCheckoutInfo() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const router = useRouter();
+
   const [props, setProps] = useState<SuccessProps>({
     costumerName: "",
-    product: {
-      name: "",
-      imageUrl: "",
-    },
+    product: [
+      {
+        name: "",
+        imageUrl: "",
+      },
+    ],
   });
+  const hasMoreThanOneProduct = props.product.length <= 1;
+  let marginImage = 0;
+
+  const ImageContenerWidth = (imageWidth - 52) * props.product.length + 52;
 
   if (!sessionId) {
     router.push("/");
@@ -40,20 +53,44 @@ function SuccessCheckoutInfo() {
 
   return (
     <>
-      <ImageContainer>
-        {props?.product?.imageUrl && (
-          <Image
-            src={props?.product?.imageUrl}
-            width={120}
-            height={110}
-            alt=""
-          />
-        )}
-      </ImageContainer>
-      {props?.costumerName && props?.product?.name && (
+      <WrapperSuccessImage
+        css={{
+          width: `${ImageContenerWidth}px`,
+          overflowX: "auto",
+        }}
+      >
+        {props?.product.map((image, index) => {
+          marginImage = index >= 1 ? marginImage + 88 : 0;
+
+          return (
+            <ImageContainer
+              key={image?.imageUrl}
+              css={{
+                zIndex: `${index + 1}`,
+                marginLeft: `${
+                  hasMoreThanOneProduct ? "initial" : `${marginImage}px`
+                }`,
+              }}
+            >
+              {image?.imageUrl && (
+                <Image
+                  src={image?.imageUrl}
+                  width={imageWidth}
+                  height={120}
+                  alt=""
+                />
+              )}
+            </ImageContainer>
+          );
+        })}
+      </WrapperSuccessImage>
+      <h1>Compra efetuada!</h1>
+      {props?.costumerName && props?.product[0]?.name && (
         <p>
-          Uhuul <strong>{props?.costumerName}</strong>, sua{" "}
-          <strong>{props?.product?.name}</strong> já está a caminho da sua casa.
+          Uhuul <strong>{props?.costumerName}</strong>, sua compra de{" "}
+          <strong>{props?.product.length}</strong>{" "}
+          {props?.product.length > 1 ? "camisetas" : "camiseta"} já está a
+          caminho da sua casa.
         </p>
       )}
     </>

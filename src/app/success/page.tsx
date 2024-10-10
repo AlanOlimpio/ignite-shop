@@ -16,7 +16,6 @@ export const metadata: Metadata = {
 export default function Success() {
   return (
     <SuccessContainer>
-      <h1>Compra efetuada!</h1>
       <Suspense>
         <SuccessCheckoutInfo />
       </Suspense>
