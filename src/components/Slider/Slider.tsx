@@ -6,8 +6,9 @@ import "keen-slider/keen-slider.min.css";
 import { priceFormatter } from "@/utils/formatter";
 import Link from "next/link";
 import { Handbag } from "@phosphor-icons/react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartStoreContext } from "@/contexts/CartStore";
+import { ProductInterfaceProps } from "@/interfaces/Product";
 
 interface SliderProps {
   products: {
@@ -19,6 +20,7 @@ interface SliderProps {
 }
 
 function Slider({ products }: SliderProps) {
+  const [hasCartList, setHasCartList] = useState<ProductInterfaceProps[]>([]);
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     mode: "free",
     slides: {
@@ -36,11 +38,14 @@ function Slider({ products }: SliderProps) {
   });
 
   const { cartList } = useContext(CartStoreContext);
+  useEffect(() => {
+    setHasCartList(cartList);
+  }, [cartList]);
 
   return (
     <SliderContainer ref={sliderRef} className="keen-slider">
       {products.map((product) => {
-        const hasCart = cartList.some((item) => item.id === product.id);
+        const hasCart = hasCartList.some((item) => item.id === product.id);
         return (
           <Link
             href={`/product/${product.id}`}

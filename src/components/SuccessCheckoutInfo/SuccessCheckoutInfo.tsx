@@ -52,6 +52,7 @@ function SuccessCheckoutInfo() {
     }
     hadleGetCheckoutSessions();
     resetCard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId]);
 
   return (

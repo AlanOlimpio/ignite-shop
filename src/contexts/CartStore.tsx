@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useReducer } from "react";
 import { ProductInterfaceProps } from "../interfaces/Product";
+import nookies from "nookies";
 import {
   handleAddProductCart,
   handleRemoveProductCart,
@@ -25,10 +26,16 @@ export function CartStoreContextProvider({
   const [CartStoreState, dispatch] = useReducer(
     cartReducer,
     { cartList: [] },
-    () => {
-      return {
-        cartList: [],
-      };
+
+    (initialState) => {
+      const cookies = nookies.get(null, "@ignite-shop:cart-state-1.0.0");
+      if (cookies["@ignite-shop:cart-state-1.0.0"]) {
+        return {
+          cartList: JSON.parse(cookies["@ignite-shop:cart-state-1.0.0"]),
+        };
+      }
+
+      return initialState;
     }
   );
 
@@ -49,7 +56,12 @@ export function CartStoreContextProvider({
   useEffect(() => {
     const stateJSON = JSON.stringify(cartList);
 
-    localStorage.setItem("@ignite-shop:cart-state-1.0.0", stateJSON);
+    if (stateJSON) {
+      nookies.set(null, "@ignite-shop:cart-state-1.0.0", stateJSON, {
+        maxAge: 60 * 60 * 24 * 7,
+        path: "/",
+      });
+    }
   }, [cartList]);
 
   return (

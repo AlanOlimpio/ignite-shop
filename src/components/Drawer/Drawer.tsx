@@ -15,18 +15,19 @@ import { CartStoreContext } from "@/contexts/CartStore";
 import CartItem from "../CartItem";
 import { priceFormatter } from "@/utils/formatter";
 import ButtonCheckout from "../ButtonCheckout";
-import { LineItems } from "@/interfaces/Product";
+import { LineItems, ProductInterfaceProps } from "@/interfaces/Product";
 
 function Drawer() {
   const [sum, setSum] = useState(0);
   const { cartList } = useContext(CartStoreContext);
+  const [count, setCount] = useState<ProductInterfaceProps[]>([]);
 
   const [productIdList, setProductIdList] = useState<LineItems[]>([]);
 
   useEffect(() => {
     const totalCart = () =>
       cartList.reduce(function (valueSum, product) {
-        if (product.price && product.amount) {
+        if (product?.price && product?.amount) {
           return valueSum + product.price * product.amount;
         } else {
           return 0;
@@ -50,6 +51,7 @@ function Drawer() {
     []);
 
     setProductIdList(productPriceIdList);
+    setCount(cartList);
   }, [cartList]);
 
   return (
@@ -57,7 +59,7 @@ function Drawer() {
       <Dialog.Trigger asChild>
         <CartButton>
           <Handbag size={24} weight="bold" />
-          {cartList.length > 0 && <span>{cartList.length}</span>}
+          {count.length > 0 && <span>{count.length}</span>}
         </CartButton>
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -72,7 +74,7 @@ function Drawer() {
                 <Title>Sacola de compras</Title>
 
                 {cartList?.map((product) => {
-                  return <CartItem {...product} key={product.id} />;
+                  return <CartItem {...product} key={product?.id} />;
                 })}
               </div>
               <div>
@@ -80,10 +82,10 @@ function Drawer() {
                   <p>Quantidade</p>
 
                   <span>
-                    {cartList.length === 1 ? (
+                    {cartList?.length === 1 ? (
                       <span>1 item </span>
                     ) : (
-                      <span>{cartList.length} itens</span>
+                      <span>{cartList?.length} itens</span>
                     )}
                   </span>
                 </WrapperAmount>
