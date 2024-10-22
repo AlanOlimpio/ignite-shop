@@ -7,8 +7,11 @@ Esse aplicativo foi desenvolvido no curso <a href="https://app.rocketseat.com.br
 |-------|------|------|------|
 |<img src="screencapture-home.png" alt="Home" width="100%">|<img src="screencapture-product.png" alt="Product">|<img src="screencapture-checkout.png" alt="Checkout">|<img src="screencapture-success.png" alt="Success">|
 
+## Feature Ignite-Shop-2.0 
 
-
+|Home| Product|Drawer|Checkout | Success |
+|-------|------|------|------|------|
+|<img src="screencapture-home-v2.png" alt="Home" width="100%">|<img src="screencapture-product-v2.png" alt="Product">|<img src="screencapture-drawer-v2.png" alt="Drawer">|<img src="screencapture-checkout-v2.png" alt="Checkout">|<img src="screencapture-success-v2.png" alt="Success">|
 
 ## 🔨 Funcionalidades do projeto
 
