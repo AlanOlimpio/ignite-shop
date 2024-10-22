@@ -4,6 +4,8 @@ export enum ActionEnum {
   ADD_ITEM_CARD = "ADD_ITEM_CARD",
   REMOVE_ITEM_CARD = "REMOVE_ITEM_CARD",
   RESET_CARD = "RESET_CARD",
+  OPEN_DRAWER = "OPEN_DRAWER",
+  CLOSE_DRAWER = "CLOSE_DRAWER",
 }
 
 export function handleAddProductCart(product: ProductInterfaceProps) {
@@ -26,5 +28,17 @@ export function handleRemoveProductCart(id: ProductInterfaceProps["id"]) {
 export function handleResetCard() {
   return {
     type: ActionEnum.RESET_CARD,
+  };
+}
+
+export function handleOpenDrawer() {
+  return {
+    type: ActionEnum.OPEN_DRAWER,
+  };
+}
+
+export function handleCloseDrawer() {
+  return {
+    type: ActionEnum.CLOSE_DRAWER,
   };
 }

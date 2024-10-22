@@ -5,6 +5,7 @@ import { ServerStylesheet } from "@/ServerStylesheet";
 import Header from "@/components/Header";
 import { Container } from "@/styles/Layout";
 import { CartStoreContextProvider } from "@/contexts/CartStore";
+import { DrawerContextProvider } from "@/contexts/Drawer";
 
 export default function RootLayout({
   children,
@@ -16,10 +17,12 @@ export default function RootLayout({
       <body>
         <ServerStylesheet>
           <Container>
-            <CartStoreContextProvider>
-              <Header />
-              {children}
-            </CartStoreContextProvider>
+            <DrawerContextProvider>
+              <CartStoreContextProvider>
+                <Header />
+                {children}
+              </CartStoreContextProvider>
+            </DrawerContextProvider>
           </Container>
         </ServerStylesheet>
       </body>

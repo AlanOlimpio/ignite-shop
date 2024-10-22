@@ -15,6 +15,7 @@ import { Handbag } from "@phosphor-icons/react";
 import { useContext, useEffect, useState } from "react";
 import { CartStoreContext } from "@/contexts/CartStore";
 import { ProductInterfaceProps } from "@/interfaces/Product";
+import { DrawerContext } from "@/contexts/Drawer";
 
 interface SliderProps {
   products: {
@@ -58,6 +59,7 @@ function Slider({ products }: SliderProps) {
   const [hasCartList, setHasCartList] = useState<ProductInterfaceProps[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { onOpenChangeDrawer } = useContext(DrawerContext);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     mode: "free",
     initial: 0,
@@ -108,7 +110,12 @@ function Slider({ products }: SliderProps) {
                     )}
                   </div>
                   {hasCart && (
-                    <WrapperButton>
+                    <WrapperButton
+                      onClick={(e: any) => {
+                        onOpenChangeDrawer();
+                        e.preventDefault();
+                      }}
+                    >
                       <Handbag size={24} weight="bold" />
                     </WrapperButton>
                   )}
@@ -131,7 +138,6 @@ function Slider({ products }: SliderProps) {
           <Arrow
             onClick={(e: any) => {
               e.stopPropagation() || instanceRef.current?.next();
-              console.log(currentSlide);
             }}
             disabled={
               currentSlide ===

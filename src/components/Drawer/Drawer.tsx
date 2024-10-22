@@ -16,13 +16,16 @@ import CartItem from "../CartItem";
 import { priceFormatter } from "@/utils/formatter";
 import ButtonCheckout from "../ButtonCheckout";
 import { LineItems, ProductInterfaceProps } from "@/interfaces/Product";
+import { DrawerContext } from "@/contexts/Drawer";
 
 function Drawer() {
   const [sum, setSum] = useState(0);
   const { cartList } = useContext(CartStoreContext);
+  const { isOpen, onOpenChangeDrawer } = useContext(DrawerContext);
   const [count, setCount] = useState<ProductInterfaceProps[]>([]);
 
   const [productIdList, setProductIdList] = useState<LineItems[]>([]);
+  const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
   useEffect(() => {
     const totalCart = () =>
@@ -55,7 +58,7 @@ function Drawer() {
   }, [cartList]);
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={isOpen} onOpenChange={onOpenChangeDrawer}>
       <Dialog.Trigger asChild>
         <CartButton>
           <Handbag size={24} weight="bold" />
@@ -72,6 +75,7 @@ function Drawer() {
             <>
               <div>
                 <Title>Sacola de compras</Title>
+                <Dialog.Description className="DialogDescription" />
 
                 {cartList?.map((product) => {
                   return <CartItem {...product} key={product?.id} />;

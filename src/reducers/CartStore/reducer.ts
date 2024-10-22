@@ -6,6 +6,10 @@ interface productState {
   cartList: ProductInterfaceProps[];
 }
 
+interface DrawerState {
+  isOpen: boolean;
+}
+
 export function cartReducer(state: productState, action: any) {
   switch (action.type) {
     case ActionEnum.ADD_ITEM_CARD: {
@@ -37,6 +41,25 @@ export function cartReducer(state: productState, action: any) {
       };
     }
 
+    default:
+      return state;
+  }
+}
+
+export function drawerReducer(state: DrawerState, action: any) {
+  switch (action.type) {
+    case ActionEnum.OPEN_DRAWER: {
+      return {
+        ...state,
+        isOpen: true,
+      };
+    }
+    case ActionEnum.CLOSE_DRAWER: {
+      return {
+        ...state,
+        isOpen: false,
+      };
+    }
     default:
       return state;
   }
