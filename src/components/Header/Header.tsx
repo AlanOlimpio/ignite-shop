@@ -11,7 +11,7 @@ function Header() {
     <HeaderWrapper
       css={{ justifyContent: `${isSuccess ? "space-between" : "center"}` }}
     >
-      <Link href="/" prefetch={false}>
+      <Link href="/" aria-label="Home" prefetch={false}>
         <Image src={logoImg} alt="" />
       </Link>
       {isSuccess && <Drawer />}
