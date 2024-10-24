@@ -100,7 +100,13 @@ function Slider({ products }: SliderProps) {
               prefetch={false}
             >
               <Product key={product.name} className="keen-slider__slide">
-                <Image src={product.imageUrl} width={520} height={480} alt="" />
+                <Image
+                  src={product.imageUrl}
+                  data-testid="image-keen-slider"
+                  width={520}
+                  height={480}
+                  alt={product.name}
+                />
 
                 <footer>
                   <div>
